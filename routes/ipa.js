@@ -14,7 +14,7 @@ const _ = require("lodash");
 // let signingSecret = process.env.SLACK_SIGNING_SECRET;
 // let token = process.env.SLACK_BOT_TOKEN;
 
-const confidentialAccount = { signingSecret, token };
+//const confidentialAccount = { signingSecret, token };
 
 /* GET users listing. */
 router.post("/", function (req, res, next) {

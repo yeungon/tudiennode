@@ -1,0 +1,144 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-7">
+            <h2><span class="Special_Elite title">ENGLISH</span><span id ="joke__word"
+                    class="Special_Elite style-compatible-color-pink-h1 circle-style tracking-in-expand">
+                    "JOKES"</span> 
+            </h2>
+
+            <h2 class="bernound-clean pl-4">AND</h2>
+            <br>
+
+            <h2>
+                <span class="style-font-ny-irvin style__compatible-color-light-blue"> ENGLISH PHONETICS TRANSCRIPTION</span>
+            </h2>
+            <br>
+            <br>
+
+            <p id="setup" class="style__font-adode-caslon-pro">Loading...</p>
+            <p class="punchline style__font-adode-caslon-pro"></p>
+
+            <button onclick="randomJoke()" class="style-font-ny-irvin btn btn-primary blue-compatible">RANDOMIZE
+                JOKES</button>
+            <br>
+            <br>
+
+            <div class="form-group">
+                <label class="sunflora" for="Textarea1">Nhập đoạn văn bản English</label>
+                <br><br>
+                <textarea class="form-control" id="Textarea1" rows="7"></textarea>
+            </div>
+            <br>
+            <p class= "Special_Elite lead" id="thongbao"></p>
+            <br>
+            <button onclick="getIPA()" class="style-font-ny-irvin btn btn-primary blue-compatible">TRANSCRIBE
+                NOW</button>
+            <br><br>
+            <p class = "Special_Elite h3" id = "analytics"></p>
+            <p class = "Ventography h3" id="result"></p>
+            <br>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    const joke__word = document.querySelector("#joke__word");
+
+
+    function getJokes() {
+       
+        fetch('/jokes')
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data.setup)        
+                joke__word.classList.remove("vibrate-1");
+
+                const setupID = document.querySelector("#setup");
+                setupID.innerHTML = "<strong>Say something, please bồ tèo: </strong>" + data.setup;
+                const punchline = document.querySelector(".punchline");
+                punchline.innerHTML = "<strong>Đáp đây: </strong>" + data.punchline;
+            });
+
+    }
+
+    getJokes();
+
+    function randomJoke(e) {
+        console.log(e)
+        joke__word.classList.add("vibrate-1");
+        getJokes()
+    }
+
+    const thongbao = document.querySelector('#thongbao');
+    const result = document.querySelector('#result');
+    const analytics = document.querySelector("#analytics");
+    
+
+    function submitPostRequest(dataToBeSubmitted) {
+
+        
+        analytics.innerHTML = "đang xử lý ... "
+        analytics.classList.add("vibrate-1");
+
+        fetch('/ipa', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                //'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: JSON.stringify(dataToBeSubmitted)
+        }).then(function (response) {
+            return response.json();
+        }).then(function (dataJSON) {
+            
+            if(dataJSON.outPut.length > 0){
+                result.innerHTML = `&#47;${dataJSON.outPut}&#47;`;
+            }else{
+                result.innerHTML = `<span class="style-font-ny-irvin style__taxi-color">OLA, THERE IS NO ENGLISH HERE, PLEASE DOUBLE CHECK...</span>`;
+            }
+            
+            analytics.innerHTML = "Phiên âm Anh ngữ: "
+            analytics.classList.remove("vibrate-1");
+
+            thongbao.innerHTML = "";
+            console.log(`IPA transcribed: ${dataJSON.outPut}`);
+        });
+    }
+
+    function getTextContent() {
+        let contentSubmitted = document.querySelector('#Textarea1').value;
+
+        if (contentSubmitted) {
+            submitPostRequest({ result: contentSubmitted });
+        } else {
+
+            thongbao.innerHTML = "Bạn chưa nhập text...";
+
+            result.innerHTML = "";
+
+            console.log('Please enter in content to POST.');
+        }
+    }
+
+    const getIPA = () => {
+
+        try{
+            getTextContent()
+        }catch(e){
+            console.log(e);
+            analytics.innerHTML = `Sorry, có lỗi hệ thống ${e.message}`;
+        }finally{
+             //analytics.innerHTML = "Loading...."
+        }
+
+        
+    }
+
+</script>

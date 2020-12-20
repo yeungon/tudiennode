@@ -40,6 +40,7 @@ router.post("/", function (req, res, next) {
 
   function tranScripTion() {
     let ipaJSON = fs.readFileSync("./dictionary/eng_ipa.json");
+
     let ipaArrayOBject = JSON.parse(ipaJSON);
 
    //console.log(ipaArrayOBject);
@@ -49,9 +50,7 @@ router.post("/", function (req, res, next) {
       return _.findIndex(ipaArrayOBject, function(o) { return o.word == eachString; });
     });
 
-    console.log(stringIPAIndex)
-
-    // Remove unavailable word in the dictionary data as lodash return -1
+     // Remove unavailable word in the dictionary data as lodash return -1
     stringIPAIndex = stringIPAIndex.filter(index => index >=0);
     
     let finalIPA = stringIPAIndex.map((eachWord, index) =>{

@@ -1,92 +1,298 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col">
-        </div>
-        <div class="col-7">
-            <h2><span class="Special_Elite title">ENGLISH</span><span id ="joke__word"
-                    class="Special_Elite style-compatible-color-pink-h1 circle-style tracking-in-expand">
-                    "JOKES"</span> 
+<div class="container">
+    <main>
+        <div class="mt-4 py-5 text-center">
+            <h2><span id="english__word" class="Special_Elite title">ENGLISH...</span>
+                <span class="Special_Elite style-compatible-color-pink-h1 circle-style tracking-in-expand">
+                    "jokes"</span>
             </h2>
 
-            <h2 class="bernound-clean pl-4">AND</h2>
+            <h2 class="bernound-clean pl-4" style="color: #FF9E9D">AND</h2>
             <br>
 
             <h2>
-                <span class="style-font-ny-irvin style__compatible-color-light-blue"> ENGLISH PHONETICS TRANSCRIPTION</span>
+                <span class="style-font-ny-irvin style__compatible-color-light-blue"> ENGLISH PHONETICS
+                    TRANSCRIPTION</span>
             </h2>
-            <br>
-            <br>
+        </div>
 
-            <p id="setup" class="style__font-adode-caslon-pro">Loading...</p>
-            <p class="punchline style__font-adode-caslon-pro"></p>
+        <div class="row g-3">
 
-            <button onclick="randomJoke()" class="style-font-ny-irvin btn btn-primary blue-compatible">RANDOMIZE
-                JOKES</button>
-            <br>
-            <br>
+            <div class="col-md-5 col-lg-4 order-md-last" id="mainApp">
 
-            <div class="form-group">
-                <label class="sunflora" for="Textarea1">Nhập đoạn văn bản English</label>
-                <br><br>
-                <textarea class="form-control" id="Textarea1" rows="7"></textarea>
+                <div v-if="display">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted style-font-ny-irvin">YOUR TEXT</span>
+                        <span class="badge bg-secondary rounded-pill">Word count: \{{totalText}}</span>
+                    </h4>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">Product name</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div>
+                            <span class="text-muted">$12</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">Second product</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div>
+                            <span class="text-muted">$8</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">Third item</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div>
+                            <span class="text-muted">$5</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <div class="text-success">
+                                <h6 class="my-0">Promo code</h6>
+                                <small>EXAMPLECODE</small>
+                            </div>
+                            <span class="text-success">−$5</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Total (USD)</span>
+                            <strong>$20</strong>
+                        </li>
+                        <li>Xin chào \{{ message }}</li>
+                    </ul>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Promo code">
+                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                    </div>
+                </div>
             </div>
-            <br>
-            <p class= "Special_Elite lead" id="thongbao"></p>
-            <br>
-            <button onclick="getIPA()" class="style-font-ny-irvin btn btn-primary blue-compatible">TRANSCRIBE
-                NOW</button>
-            <br><br>
-            <p class = "Special_Elite h3" id = "analytics"></p>
-            <p class = "Ventography h3" id="result"></p>
-            <br>
-        </div>
-        <div class="col">
 
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3 Special_Elite">Joke</h4>
+
+                <p id="setup" class="style__font-adode-caslon-pro">Loading...</p>
+                <p class="punchline style__font-adode-caslon-pro"></p>
+
+                <p class="jokefromlocalstorage main-text style__font-adode-caslon-pro"></p>
+
+                <button onclick="randomJoke()" class="style-font-ny-irvin btn btn-primary blue-compatible">RANDOMIZE
+                    JOKES</button>
+                <br>
+                <br>
+                <div class="form-group">
+                    <label class="font__fort-book" for="Textarea1">Paste English text in the section below</label>
+                    <br><br>
+                    <textarea class="form-control" id="Textarea1" rows="7"></textarea>
+                </div>
+                <br>
+                <p class="Special_Elite lead" id="thongbao"></p>
+
+                <br>
+                <p class="Special_Elite h3" id="analytics"></p>
+                <p class="Ventography h3" id="result"></p>
+
+                <p class="Ventography h3" id="resultfromlocalstorage"></p>
+
+                <br>
+                <button onclick="getIPA()" class="style-font-ny-irvin btn btn-primary blue-compatible">TRANSCRIBE
+                    NOW</button>
+                <br>
+                <br>
+
+
+                {{!-- VUE --}}
+                <div id="HandlingString" class="hidden-div">
+                    <button @click="handlingText" class="style-font-ny-irvin btn btn-primary blue-compatible">ANALYZING
+                        TEXT</button>
+
+                    <li class="text-success">Đây là dữ liệu từ vue \{{ textString }}</li>
+
+                    <p id="testing">hello</p>
+                </div>
+                <br>
+
+            </div>
         </div>
-    </div>
+    </main>
+
+    <footer class="my-1 pt-1 text-muted text-center text-small">
+        {{!-- <p class="mb-1 style-font-ny-irvin"> Since &copy; 2018 Online Dictionary</p> --}}
+        <ul class="list-inline">
+            <li class="list-inline-item style-font-ny-irvin">SINCE &COPY; 2018 </li>
+            <li class="list-inline-item Special_Elite"><a class="text-decoration-none style-font-ny-irvin"
+                    href="https://tudien.net">ONLINE DICTIONARY</a></li>
+            <li class="font__fort-book list-inline-item ">By Vuong Nguyen</li>
+
+        </ul>
+    </footer>
+    <p>Count numbers: <output id="resultnumber"></output></p>
+    <button onclick="startWorker()">Start Worker</button>
+    <button onclick="stopWorker()">Stop Worker</button>
+
 
 </div>
 
 <script>
 
-    const joke__word = document.querySelector("#joke__word");
+    //Taking Worker for fetching JSON-dictionary
+    if (window.Worker) {
 
+        var w;
+
+        function startWorker() {
+            if (typeof (Worker) !== "undefined") {
+                if (typeof (w) == "undefined") {
+                    w = new Worker("worker.js");
+                }
+                w.onmessage = function (event) {
+                    document.getElementById("resultnumber").innerHTML = event.data;
+                };
+            } else {
+                document.getElementById("resultnumber").innerHTML = "Sorry! No Web Worker support.";
+            }
+        }
+
+        function stopWorker() {
+            w.terminate();
+            w = undefined;
+        }
+    }
+
+
+    function fetchDictionaryToLocalStorage() {
+        fetch('/data/English-phonetic-transcription.json')
+            .then(response => response.json())
+            .then((dictionaryJson) => {
+                const jokesFromServer = [];
+                jokesFromServer.push(dictionaryJson);
+                localStorage.setItem("dictionaryData", JSON.stringify(jokesFromServer));
+            });
+
+    }
+
+    fetchDictionaryToLocalStorage()
+
+    function fetchAndStoreJsonToLocalStorage() {
+        fetch('/data/stupidstuff.json')
+            .then(response => response.json())
+            .then((dataJson) => {
+                const jokesFromServer = [];
+                jokesFromServer.push(dataJson);
+                localStorage.setItem("jokesData", JSON.stringify(jokesFromServer));
+            });
+
+    }
+
+    const checkIfJsonIsFetched = () => {
+        let fetchedOrNotFlag = JSON.parse(localStorage.getItem("jokesData"));
+        if (fetchedOrNotFlag) {
+            return true;
+        } else {
+            fetchAndStoreJsonToLocalStorage();
+            return false;
+        }
+    }
+
+    const setupID = document.querySelector("#setup");
+    const punchline = document.querySelector(".punchline");
 
     function getJokes() {
-       
         fetch('/jokes')
             .then(response => response.json())
             .then((data) => {
-                console.log(data.setup)        
-                joke__word.classList.remove("vibrate-1");
-
-                const setupID = document.querySelector("#setup");
-                setupID.innerHTML = "<strong>Say something, please bồ tèo: </strong>" + data.setup;
-                const punchline = document.querySelector(".punchline");
-                punchline.innerHTML = "<strong>Đáp đây: </strong>" + data.punchline;
+                setupID.innerHTML = `<strong>Say something, please: </strong> ${data.setup}`;
+                punchline.innerHTML = "<strong>Here is the response: </strong>" + data.punchline;
             });
 
     }
 
     getJokes();
 
+    let jokefromlocalstorage = document.querySelector(".jokefromlocalstorage");
+
     function randomJoke(e) {
-        console.log(e)
-        joke__word.classList.add("vibrate-1");
-        getJokes()
+        if (checkIfJsonIsFetched()) {
+            let fetchedfromLocalStorage = JSON.parse(localStorage.getItem("jokesData"));
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * Math.floor(max));
+            }
+            let storyBody = fetchedfromLocalStorage[0][getRandomInt(3145)].body;
+            jokefromlocalstorage.innerHTML = storyBody;
+            //Hide initial jokes fetched from API
+            setupID.classList.add("hidden-div");
+            punchline.classList.add("hidden-div");
+            console.log("Data fetched from localStorate")
+        } else {
+            getJokes()
+            console.log("chưa có");
+        }
     }
 
+    ////////////////////////////////////////////////////////
     const thongbao = document.querySelector('#thongbao');
     const result = document.querySelector('#result');
     const analytics = document.querySelector("#analytics");
-    
+    const HandlingStringId = document.querySelector("#HandlingString");
 
-    function submitPostRequest(dataToBeSubmitted) {
-
-        
-        analytics.innerHTML = "đang xử lý ... "
+    const changeStyle = () => {
+        analytics.innerHTML = "handling ... ";
         analytics.classList.add("vibrate-1");
+        HandlingStringId.classList.add("hidden-div");
+    }
 
+    const successStyle = () => {
+        analytics.innerHTML = "Phonetics: "
+        analytics.classList.remove("vibrate-1");
+        thongbao.innerHTML = "";
+    }
+
+
+    
+//////////////////////////METHOD 1: FETCH FROM SERVER /////////////////////////////////////////////////////////////////////
+    let resultfromlocalstorage = document.querySelector("#resultfromlocalstorage");
+    const checkIfLocalStorageIsReady = (dataFromTextArea) => {
+        let fetchedDictionaryfromLocalStorage = JSON.parse(localStorage.getItem("dictionaryData"));
+        if (fetchedDictionaryfromLocalStorage) {
+            if (dataFromTextArea) {
+                let stringTextArea = dataFromTextArea.result;
+                let arrayString = stringTextArea.split(" ");
+                let arrayStringIPA = arrayString.map((eachWord, index) => {
+                    let theSymbol = fetchedDictionaryfromLocalStorage[0][eachWord];
+                    return theSymbol;
+                })
+
+                function convertToIPA(dataStringArray) {
+                    let symbols = { "0": "ɒ", "@": "ə", "&": "æ", ".": "ˌ", "U": "ʊ", "S": "ʃ", "R": "r", "O": "ɔː", "Z": "d͡ʒ", "V": "ʌ", "N": "ŋ", "u": "uː", "T": "θ", "D": "ð", "i": "iː", "Z": "ʒ", "A": "ɑː", "3": "3ː" };
+                    let keySymbols = Object.keys(symbols);
+                    let valuesSymbols = Object.values(symbols);
+                    let dataHandled = dataStringArray.map((element, index) => {
+                        let theelement = Array.from(element)
+                        let result = theelement.map((eachLetter, index) => {
+                            let indexOfKey = keySymbols.indexOf(eachLetter);
+                            let thatsymbol = keySymbols[indexOfKey];
+                            let thatipa = valuesSymbols[indexOfKey];
+                            return eachLetter.replace(thatsymbol, thatipa);
+                        });
+                        return result.join("");
+                    });
+                    return dataHandled.join(" ");
+                }
+
+                let dataOutPutToHTML = convertToIPA(arrayStringIPA);
+                successStyle()
+                resultfromlocalstorage.innerHTML = `\/${dataOutPutToHTML}\/`;
+
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    console.log(checkIfLocalStorageIsReady());
+
+//////////////////////////METHOD 2: FETCH FROM SERVER //////////////////////////////
+    const fetchToServer = (dataToBeSubmitted) => {
         fetch('/ipa', {
             method: 'post',
             headers: {
@@ -97,48 +303,91 @@
         }).then(function (response) {
             return response.json();
         }).then(function (dataJSON) {
-            
-            if(dataJSON.outPut.length > 0){
+
+            if (dataJSON.outPut.length > 0) {
                 result.innerHTML = `&#47;${dataJSON.outPut}&#47;`;
-            }else{
+                HandlingStringId.classList.remove("hidden-div");
+            } else {
                 result.innerHTML = `<span class="style-font-ny-irvin style__taxi-color">OLA, THERE IS NO ENGLISH HERE, PLEASE DOUBLE CHECK...</span>`;
             }
-            
-            analytics.innerHTML = "Phiên âm Anh ngữ: "
-            analytics.classList.remove("vibrate-1");
 
-            thongbao.innerHTML = "";
+            successStyle()
+
             console.log(`IPA transcribed: ${dataJSON.outPut}`);
         });
+
+    };
+
+//////////////////////////////////////////////////////////////////
+    function submitPostRequest(dataToBeSubmitted) {
+        changeStyle()
+        if (checkIfLocalStorageIsReady()) {
+            checkIfLocalStorageIsReady(dataToBeSubmitted)            
+        } else {
+            fetchToServer(dataToBeSubmitted)
+        }
+
     }
 
     function getTextContent() {
         let contentSubmitted = document.querySelector('#Textarea1').value;
-
         if (contentSubmitted) {
             submitPostRequest({ result: contentSubmitted });
         } else {
-
-            thongbao.innerHTML = "Bạn chưa nhập text...";
-
+            thongbao.innerHTML = "Give us some text please...";
+            analytics.innerHTML = ""
             result.innerHTML = "";
-
-            console.log('Please enter in content to POST.');
+            console.log('Content is empty.');
         }
     }
+
 
     const getIPA = () => {
 
-        try{
+        try {
             getTextContent()
-        }catch(e){
+        } catch (e) {
             console.log(e);
-            analytics.innerHTML = `Sorry, có lỗi hệ thống ${e.message}`;
-        }finally{
-             //analytics.innerHTML = "Loading...."
+            analytics.innerHTML = `Sorry, có lỗi hệ thống:  ${e.message}!`;
+        } finally {
+            //analytics.innerHTML = "Loading...."
         }
-
-        
     }
+
+
+    /////////////////////////////////////////////////////////////
+    const HelloVueApp = {
+        data() {
+            return {
+                message: 'Hello Vue!!',
+                totalText: 150,
+                display: true
+            }
+        }
+    }
+
+    Vue.createApp(HelloVueApp).mount('#mainApp')
+
+
+    const HandlingString = {
+        data() {
+            return {
+                textString: 'Nói chiện Vue!!',
+                display: true
+            }
+        },
+        methods: {
+            handlingText() {
+                this.textString = "cập nhật đê";
+
+                //let data = JSON.parse(localStorage.getItem("jokesData"));
+
+                console.log(this)
+            }
+        }
+    }
+
+    Vue.createApp(HandlingString).mount('#HandlingString')
+
 
 </script>
